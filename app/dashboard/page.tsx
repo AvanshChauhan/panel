@@ -96,7 +96,7 @@ export default function Dashboard() {
                 <span>✉</span> JUSTKAYBUILD@GMAIL.COM
               </div>
               <div className={styles.profileUuid}>
-                UUID: 7A05E7CD-A710-4425-9E7F-EAED915895BB
+                UUID: 7ghjhkjjhjh
               </div>
             </div>
           </div>
