@@ -4,7 +4,30 @@ import styles from './dashboard.module.css';
 
 export default function Dashboard() {
   return (
-    <div className={styles.dashboardContainer}>
+    <div className={styles.pageContainer}>
+      <div className={styles.topNav}>
+        <div className={styles.navLeft}>
+          <div className={styles.logoBlock}></div>
+          <span>RUDRANEX admin</span>
+        </div>
+
+        <div className={styles.navCenter}>
+          <div className={`${styles.navItem} ${styles.active}`}>
+            DASHBOARD
+          </div>
+          <Link href="/dashboard/logs" className={styles.navItem}>
+            TABLE LOGS
+          </Link>
+        </div>
+
+        <div className={styles.navRight}>
+          <button className={styles.iconBtn} aria-label="Refresh">R</button>
+          <button className={styles.iconBtn} aria-label="Theme">T</button>
+          <button className={`${styles.iconBtn} ${styles.primary}`} aria-label="Continue">GO</button>
+        </div>
+      </div>
+
+      <div className={styles.dashboardContainer}>
       
       {/* Left Sidebar */}
       <div className={`${styles.card} ${styles.sidebar}`}>
@@ -14,23 +37,21 @@ export default function Dashboard() {
         </div>
         
         <div className={styles.searchInput}>
-          <span>⌕</span>
           <input type="text" placeholder="SEARCH ID / NAME..." />
         </div>
         
         <div className={styles.userList}>
           
           <div className={`${styles.userItem} ${styles.activeUser}`}>
-            <div className={styles.userAvatar}>👤</div>
+            <div className={styles.userAvatar}>T1</div>
             <div className={styles.userInfo}>
               <span className={styles.userName}>test1</span>
               <span className={styles.userRole}>FREE TRIAL</span>
             </div>
-            <span>›</span>
           </div>
           
           <div className={styles.userItem}>
-            <div className={styles.userAvatar}>👤</div>
+            <div className={styles.userAvatar}>SO</div>
             <div className={styles.userInfo}>
               <span className={styles.userName}>some</span>
               <span className={styles.userRole}>FREE TRIAL</span>
@@ -38,7 +59,7 @@ export default function Dashboard() {
           </div>
           
           <div className={styles.userItem}>
-            <div className={styles.userAvatar}>👤</div>
+            <div className={styles.userAvatar}>XY</div>
             <div className={styles.userInfo}>
               <span className={styles.userName}>XYZ</span>
               <span className={styles.userRole}>FREE TRIAL</span>
@@ -46,7 +67,7 @@ export default function Dashboard() {
           </div>
           
           <div className={styles.userItem}>
-            <div className={styles.userAvatar}>👤</div>
+            <div className={styles.userAvatar}>DJ</div>
             <div className={styles.userInfo}>
               <span className={styles.userName}>dj</span>
               <span className={styles.userRole}>AGENCIES / HEAVY DUTY</span>
@@ -54,7 +75,7 @@ export default function Dashboard() {
           </div>
           
           <div className={styles.userItem}>
-            <div className={styles.userAvatar}>👤</div>
+            <div className={styles.userAvatar}>NW</div>
             <div className={styles.userInfo}>
               <span className={styles.userName}>new</span>
               <span className={styles.userRole}>FREE TRIAL</span>
@@ -62,7 +83,7 @@ export default function Dashboard() {
           </div>
           
           <div className={styles.userItem}>
-            <div className={styles.userAvatar}>👤</div>
+            <div className={styles.userAvatar}>NY</div>
             <div className={styles.userInfo}>
               <span className={styles.userName}>naya</span>
               <span className={styles.userRole}>FREE TRIAL</span>
@@ -70,7 +91,7 @@ export default function Dashboard() {
           </div>
           
           <div className={styles.userItem}>
-            <div className={styles.userAvatar}>👤</div>
+            <div className={styles.userAvatar}>DV</div>
             <div className={styles.userInfo}>
               <span className={styles.userName}>dev</span>
               <span className={styles.userRole}>FREE TRIAL</span>
@@ -86,14 +107,14 @@ export default function Dashboard() {
         {/* Profile Card */}
         <div className={`${styles.card} ${styles.profileCard}`}>
           <div className={styles.profileLeft}>
-            <div className={styles.largeAvatar}>👤</div>
+            <div className={styles.largeAvatar}>T1</div>
             <div className={styles.profileDetails}>
               <div className={styles.profileNameRow}>
                 <span className={styles.profileName}>test1</span>
                 <span className={styles.activeBadge}>ACTIVE</span>
               </div>
               <div className={styles.profileEmail}>
-                <span>✉</span> JUSTKAYBUILD@GMAIL.COM
+                JUSTKAYBUILD@GMAIL.COM
               </div>
               <div className={styles.profileUuid}>
                 UUID: 7ghjhkjjhjh
@@ -103,7 +124,7 @@ export default function Dashboard() {
           <div className={styles.profileActions}>
             <Link href="/dashboard/logs" style={{textDecoration: 'none'}}>
               <button className={styles.btnPrimary}>
-                <span>📋</span> VIEW TABLE LOGS
+                VIEW TABLE LOGS
               </button>
             </Link>
             <button className={styles.btnSecondary}>
@@ -116,17 +137,7 @@ export default function Dashboard() {
         <div className={styles.metricsGrid}>
           
           <div className={`${styles.card} ${styles.metricCard}`}>
-            <div className={styles.metricHeader}>SUBSCRIPTION PLAN</div>
-            <div className={styles.metricIcon}>💼</div>
-            <div className={styles.metricValue}>
-              FREE TRIAL <span className={styles.metricSubValue}>Active</span>
-            </div>
-            <div className={`${styles.metricLine} ${styles.lineGreen}`}></div>
-          </div>
-          
-          <div className={`${styles.card} ${styles.metricCard}`}>
             <div className={styles.metricHeader}>SYSTEM LATENCY</div>
-            <div className={styles.metricIcon}>📈</div>
             <div className={styles.metricValue}>
               24 <span className={styles.metricSubValue}>ms</span>
             </div>
@@ -135,7 +146,6 @@ export default function Dashboard() {
           
           <div className={`${styles.card} ${styles.metricCard}`}>
             <div className={styles.metricHeader}>TOTAL PERSONAS</div>
-            <div className={styles.metricIcon}>👥</div>
             <div className={styles.metricValue}>
               0 <span className={styles.metricSubValue}>/ 10</span>
             </div>
@@ -144,7 +154,6 @@ export default function Dashboard() {
           
           <div className={`${styles.card} ${styles.metricCard}`}>
             <div className={styles.metricHeader}>IMAGE GENERATION</div>
-            <div className={styles.metricIcon}>🥧</div>
             <div className={styles.metricValue}>
               0 <span className={styles.metricSubValue}>/ 100</span>
             </div>
@@ -193,7 +202,7 @@ export default function Dashboard() {
           <div className={styles.card}>
             <div className={styles.cardTitleRow} style={{marginBottom: '16px'}}>
                <div className={styles.cardTitle} style={{fontSize: '14px', display: 'flex', alignItems: 'center', gap: '8px'}}>
-                 <span style={{color: 'var(--accent-bright)'}}>📈</span> USER EFFICIENCY
+                 USER EFFICIENCY
                </div>
             </div>
             <div className={styles.efficiencyText}>
@@ -204,6 +213,7 @@ export default function Dashboard() {
         </div>
 
       </div>
+    </div>
     </div>
   );
 }

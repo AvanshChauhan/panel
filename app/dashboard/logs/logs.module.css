@@ -45,7 +45,6 @@
 .navItem {
   display: flex;
   align-items: center;
-  gap: 8px;
   cursor: pointer;
   text-decoration: none;
   color: inherit;
@@ -78,6 +77,9 @@
   color: #fff;
   cursor: pointer;
   transition: all 0.2s;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0;
 }
 
 .iconBtn:hover {
@@ -96,6 +98,8 @@
 }
 
 .logTableCard {
+  position: relative;
+  overflow: hidden;
   background:
     linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.055) 15%, transparent 34%),
     linear-gradient(315deg, rgba(255,255,255,0.1), transparent 32%),
@@ -108,6 +112,21 @@
     inset 0 1px 0 rgba(255,255,255,0.26),
     inset 0 -1px 0 rgba(255,255,255,0.08),
     0 24px 60px rgba(0,0,0,0.5);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.logTableCard:hover {
+  border-color: rgba(255,255,255,0.28);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.3),
+    inset 0 -1px 0 rgba(255,255,255,0.1),
+    0 28px 66px rgba(0,0,0,0.58);
+  transform: translateY(-2px);
+}
+
+.logTableCard > * {
+  position: relative;
+  z-index: 1;
 }
 
 .logTableHeader {
@@ -146,7 +165,6 @@
   color: #fff;
   display: flex;
   align-items: center;
-  gap: 12px;
   font-size: 12px;
   width: 240px;
 }
@@ -206,6 +224,15 @@
   border-bottom: none;
 }
 
+.emptyState {
+  padding: 32px 0 0;
+  color: #777;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-align: center;
+}
+
 .logIdentity {
   display: flex;
   align-items: center;
@@ -221,7 +248,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 20px;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0;
 }
 
 .logName {

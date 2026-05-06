@@ -1,23 +1,46 @@
 "use client";
 
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 import Link from 'next/link';
 import styles from './logs.module.css';
 
+const transactions = [
+  { name: "TEST1", email: "justkaybuild@gmail.com", plan: "FREE TRIAL", active: true, tokens: 0, uptime: "24 MS" },
+  { name: "AYUSH YADAV", email: "", plan: "FREE TRIAL", active: true, tokens: 0, uptime: "24 MS" },
+  { name: "XYZ", email: "", plan: "FREE TRIAL", active: true, tokens: 0, uptime: "24 MS" },
+  { name: "MAYANK", email: "mayank542work@gmail.com", plan: "AGENCIES / HEAVY DUTY", active: true, tokens: 5, uptime: "24 MS" },
+  { name: "NEW", email: "", plan: "FREE TRIAL", active: false, tokens: 0, uptime: "24 MS" },
+];
+
 export default function LogsPage() {
-  const transactions = [
-    { name: "TEST1", email: "justkaybuild@gmail.com", plan: "FREE TRIAL", active: true, tokens: 0, uptime: "24 MS" },
-    { name: "AYUSH YADAV", email: "", plan: "FREE TRIAL", active: true, tokens: 0, uptime: "24 MS" },
-    { name: "XYZ", email: "", plan: "FREE TRIAL", active: true, tokens: 0, uptime: "24 MS" },
-    { name: "MAYANK", email: "mayank542work@gmail.com", plan: "AGENCIES / HEAVY DUTY", active: true, tokens: 5, uptime: "24 MS" },
-    { name: "NEW", email: "", plan: "FREE TRIAL", active: false, tokens: 0, uptime: "24 MS" },
-  ];
+  const [filterQuery, setFilterQuery] = useState("");
+
+  const filteredTransactions = useMemo(() => {
+    const query = filterQuery.trim().toLowerCase();
+
+    if (!query) {
+      return transactions;
+    }
+
+    return transactions.filter((transaction) => {
+      const searchableText = [
+        transaction.name,
+        transaction.email,
+        transaction.plan,
+        transaction.active ? "active" : "inactive",
+        `${transaction.tokens}%`,
+        transaction.uptime,
+      ].join(" ").toLowerCase();
+
+      return searchableText.includes(query);
+    });
+  }, [filterQuery]);
 
   const downloadCSV = () => {
     const headers = ["IDENTITY", "EMAIL", "SUBSCRIPTION", "RESOURCES (TOKENS %)", "UPTIME / LATENCY"];
     const csvContent = [
       headers.join(","),
-      ...transactions.map(t => `${t.name},${t.email},${t.plan},${t.tokens}%,${t.uptime}`)
+      ...filteredTransactions.map(t => `${t.name},${t.email},${t.plan},${t.tokens}%,${t.uptime}`)
     ].join("\n");
     
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
@@ -43,20 +66,17 @@ export default function LogsPage() {
         
         <div className={styles.navCenter}>
           <Link href="/dashboard" className={styles.navItem}>
-            <span>▦</span> DASHBOARD
+            DASHBOARD
           </Link>
           <div className={`${styles.navItem} ${styles.active}`}>
-            <span>▤</span> TABLE LOGS
-          </div>
-          <div className={styles.navItem}>
-            <span>⚡</span> PLANS
+            TABLE LOGS
           </div>
         </div>
 
         <div className={styles.navRight}>
-          <button className={styles.iconBtn}>⟳</button>
-          <button className={styles.iconBtn}>☾</button>
-          <button className={`${styles.iconBtn} ${styles.primary}`}>➡</button>
+          <button className={styles.iconBtn} aria-label="Refresh">R</button>
+          <button className={styles.iconBtn} aria-label="Theme">T</button>
+          <button className={`${styles.iconBtn} ${styles.primary}`} aria-label="Continue">GO</button>
         </div>
       </div>
 
@@ -70,8 +90,12 @@ export default function LogsPage() {
              </div>
              <div className={styles.logActions}>
                <div className={styles.filterInput}>
-                 <span>⌕</span>
-                 <input type="text" placeholder="FILTER LOGS..." />
+                 <input
+                   type="text"
+                   placeholder="FILTER LOGS..."
+                   value={filterQuery}
+                   onChange={(event) => setFilterQuery(event.target.value)}
+                 />
                </div>
                <button onClick={downloadCSV} className={styles.btnExport}>
                  EXPORT CSV
@@ -90,11 +114,11 @@ export default function LogsPage() {
               </tr>
             </thead>
             <tbody>
-              {transactions.map((txn, index) => (
+              {filteredTransactions.map((txn, index) => (
                 <tr key={index}>
                   <td>
                     <div className={styles.logIdentity}>
-                      <div className={styles.logAvatar}>👤</div>
+                      <div className={styles.logAvatar}>{txn.name.slice(0, 2)}</div>
                       <div>
                         <div className={styles.logName}>{txn.name}</div>
                         {txn.email && <div className={styles.logEmail}>{txn.email}</div>}
@@ -122,7 +146,7 @@ export default function LogsPage() {
                   </td>
                   <td>
                     <div className={styles.logUptime}>
-                      <span style={{color: '#fff'}}>📈</span> {txn.uptime}
+                      {txn.uptime}
                     </div>
                   </td>
                   <td style={{textAlign: 'right'}}>
@@ -132,6 +156,9 @@ export default function LogsPage() {
               ))}
             </tbody>
           </table>
+          {filteredTransactions.length === 0 && (
+            <div className={styles.emptyState}>NO LOGS MATCH THIS FILTER</div>
+          )}
         </div>
       </div>
 

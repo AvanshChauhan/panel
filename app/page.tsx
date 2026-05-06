@@ -1,5 +1,5 @@
-import Sc from "./Sc";
+import Dashboard from "./dashboard/page";
 
 export default function Home() {
-  return <Sc />;
+  return <Dashboard />;
 }
